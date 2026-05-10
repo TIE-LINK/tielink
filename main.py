@@ -150,7 +150,7 @@ def write_crash_log():
     """打包为 windowed exe 后没有控制台，崩溃信息写入本机日志。"""
     try:
         cfg.ensure_config_dir()
-        log_path = Path(cfg.CONFIG_DIR) / "ccds-crash.log"
+        log_path = Path(cfg.CONFIG_DIR) / "tielink-crash.log"
         log_path.write_text(traceback.format_exc(), encoding="utf-8")
     except Exception:
         return

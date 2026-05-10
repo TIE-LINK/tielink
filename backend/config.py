@@ -10,7 +10,7 @@ from typing import Optional
 
 from backend.model_alias import model_mappings_with_legacy_aliases, normalize_model_mappings
 
-CONFIG_DIR = os.path.expanduser("~/.cc-desktop-switch")
+CONFIG_DIR = os.path.expanduser("~/.tielink")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "config.json")
 BACKUP_DIR = os.path.join(CONFIG_DIR, "backups")
 DEFAULT_UPDATE_URL = "https://github.com/TIE-LINK/tielink/releases/latest/download/latest.json"
@@ -34,6 +34,21 @@ DEFAULT_CONFIG = {
 }
 
 BUILTIN_PRESETS = [
+    {
+        "id": "chotto-ai",
+        "name": "chotto.ai",
+        "baseUrl": "https://api.chotto.ai",
+        "authScheme": "bearer",
+        "apiFormat": "anthropic",
+        "models": {
+            "sonnet": "claude-sonnet-4-6",
+            "haiku": "claude-haiku-4-5",
+            "opus": "claude-opus-4-7",
+            "default": "claude-sonnet-4-6",
+        },
+        "extraHeaders": {"User-Agent": "tielink/1.0.0"},
+        "isBuiltin": True,
+    },
     {
         "id": "deepseek",
         "name": "DeepSeek",
@@ -261,7 +276,15 @@ def load_config() -> dict:
     """加载配置文件"""
     ensure_config_dir()
     if not os.path.exists(CONFIG_FILE):
-        return _config_with_legacy_model_aliases(copy.deepcopy(DEFAULT_CONFIG))
+        config = _config_with_legacy_model_aliases(copy.deepcopy(DEFAULT_CONFIG))
+        # 初回起動時に chotto.ai を自動登録
+        chotto_preset = BUILTIN_PRESETS[0]  # chotto.ai is index 0
+        chotto_provider = _normalize_provider(copy.deepcopy(chotto_preset))
+        chotto_provider["sortIndex"] = 0
+        config["providers"] = [chotto_provider]
+        config["activeProvider"] = "chotto-ai"
+        save_config(config)
+        return _config_with_legacy_model_aliases(config)
     try:
         with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             raw = json.load(f)
@@ -414,7 +437,7 @@ def list_backups() -> list:
 def export_config() -> dict:
     """导出完整配置。包含 API Key，仅供用户本机保存。"""
     return {
-        "format": "cc-desktop-switch.config",
+        "format": "tielink.config",
         "exportedAt": datetime.now().isoformat(timespec="seconds"),
         "config": load_config(),
     }

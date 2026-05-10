@@ -28,10 +28,10 @@ from backend import config as cfg
 from backend import registry
 
 
-APP_NAME = "CC Desktop Switch"
-APP_VERSION = "1.0.23"
-TRAY_OPEN_LABEL = "打开 CC Desktop Switch"
-TRAY_QUIT_LABEL = "退出"
+APP_NAME = "tielink"
+APP_VERSION = "1.0.0"
+TRAY_OPEN_LABEL = "tielink を開く"
+TRAY_QUIT_LABEL = "終了"
 _macos_app_delegate = None
 _macos_status_item = None
 _macos_status_delegate = None
@@ -40,7 +40,7 @@ MB_OK = 0x00000000
 MB_ICONINFORMATION = 0x00000040
 MB_SETFOREGROUND = 0x00010000
 ERROR_ALREADY_EXISTS = 183
-SINGLE_INSTANCE_MUTEX_NAME = "Local\\CCDesktopSwitch.SingleInstance"
+SINGLE_INSTANCE_MUTEX_NAME = "Local\\Tielink.SingleInstance"
 
 
 def safe_print(message: str):
@@ -329,7 +329,7 @@ def _install_macos_reopen_handler(window, controller):
 
             menu = AppKit.NSMenu.alloc().init()
             show_item = AppKit.NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Show CC Desktop Switch",
+                "Show tielink",
                 "showApp:",
                 "",
             )
@@ -337,7 +337,7 @@ def _install_macos_reopen_handler(window, controller):
             menu.addItem_(show_item)
             menu.addItem_(AppKit.NSMenuItem.separatorItem())
             quit_item = AppKit.NSMenuItem.alloc().initWithTitle_action_keyEquivalent_(
-                "Quit CC Desktop Switch",
+                "Quit tielink",
                 "quitApp:",
                 "",
             )
@@ -526,7 +526,7 @@ class DesktopTrayController:
         self._notified = True
         try:
             self.icon.notify(
-                "程序仍在后台运行。右键托盘图标可打开或退出。",
+                "tielink はバックグラウンドで動作中です。タスクトレイアイコンを右クリックして開くか終了してください。",
                 APP_NAME,
             )
         except Exception:
@@ -694,7 +694,7 @@ def main():
         if not request_existing_instance_activate(admin_port):
             show_message_box(
                 APP_NAME,
-                "CC Desktop Switch 已经在运行。\n\n请从任务栏或系统托盘打开已有窗口。",
+                "tielink はすでに起動しています。\n\nタスクバーまたはシステムトレイから既存のウィンドウを開いてください。",
             )
         return
 

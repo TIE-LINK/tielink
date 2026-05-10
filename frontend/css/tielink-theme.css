@@ -1,0 +1,35 @@
+/* tielink brand theme overrides — Bootstrap 5.3 variable layer */
+/* Keep existing style.css untouched; this file only overrides --bs-* and app custom properties. */
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0a0e1a;
+  --bs-body-color: #f1f5f9;
+  --bs-border-color: #1e2a4a;
+  --bs-primary: #FF4D2E;
+  --bs-primary-rgb: 255, 77, 46;
+  --bs-secondary-bg: #0f1629;
+  --bs-tertiary-bg: #161d35;
+
+  --app-bg: #0a0e1a;
+  --surface: #0f1629;
+  --soft-surface: #161d35;
+  --line: #1e2a4a;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --primary: #FF4D2E;
+  --primary-soft: rgba(255, 77, 46, .18);
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, .16);
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --shadow: 0 14px 34px rgba(0, 0, 0, .45);
+  color-scheme: dark;
+}
+
+:root {
+  --tielink-accent-blue: #3b82f6;
+  --tielink-accent-purple: #8b5cf6;
+  --tielink-accent-cyan: #06b6d4;
+  --tielink-accent-green: #22c55e;
+  --tielink-accent-orange: #FF4D2E;
+}

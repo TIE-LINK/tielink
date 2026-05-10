@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 """
-CC Desktop Switch - PyInstaller 构建配置
+tielink - PyInstaller 构建配置
 
 使用方法：
     pyinstaller build.spec                    # 文件夹模式（启动快）
@@ -8,8 +8,8 @@ CC Desktop Switch - PyInstaller 构建配置
     set CCDS_CONSOLE=1 && pyinstaller build.spec  # 调试时显示控制台
 
 输出：
-    dist/CC-Desktop-Switch/        ← 文件夹模式
-    dist/CC-Desktop-Switch.exe     ← 单文件模式（加 --onefile）
+    dist/tielink/        ← 文件夹模式
+    dist/tielink.exe     ← 单文件模式（加 --onefile）
 """
 
 import os
@@ -82,7 +82,7 @@ if ONEFILE:
         a.zipfiles,
         a.datas,
         [],
-        name="CC-Desktop-Switch",
+        name="tielink",
         debug=False,
         bootloader_ignore_signals=False,
         strip=False,
@@ -104,7 +104,7 @@ else:
         a.scripts,
         [],
         exclude_binaries=True,
-        name="CC-Desktop-Switch",
+        name="tielink",
         debug=False,
         bootloader_ignore_signals=False,
         strip=False,
@@ -128,5 +128,5 @@ else:
         strip=False,
         upx=True,
         upx_exclude=[],
-        name="CC-Desktop-Switch",
+        name="tielink",
     )

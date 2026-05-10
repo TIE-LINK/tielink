@@ -13,16 +13,16 @@ from backend.model_alias import model_mappings_with_legacy_aliases, normalize_mo
 CONFIG_DIR = os.path.expanduser("~/.cc-desktop-switch")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "config.json")
 BACKUP_DIR = os.path.join(CONFIG_DIR, "backups")
-DEFAULT_UPDATE_URL = "https://github.com/lonr-6/cc-desktop-switch/releases/latest/download/latest.json"
+DEFAULT_UPDATE_URL = "https://github.com/TIE-LINK/tielink/releases/latest/download/latest.json"
 
 DEFAULT_CONFIG = {
-    "version": "1.0.23",
+    "version": "1.0.0",
     "activeProvider": None,
     "gatewayApiKey": None,
     "providers": [],
     "settings": {
         "theme": "default",
-        "language": "zh",
+        "language": "ja",
         "proxyPort": 18080,
         "adminPort": 18081,
         "autoStart": False,
